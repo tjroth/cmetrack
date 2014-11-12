@@ -1,0 +1,1 @@
+CMETrack is a simple CRUD like command line program allowing physicians to quickly and easily record cme actiities.  Basic Html reporting is implemented.
