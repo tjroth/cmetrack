@@ -8,13 +8,13 @@ import qualified Text.Blaze.Html5.Attributes as A
 import Text.Blaze.Html.Renderer.String
 import Control.Monad (forM_)
 import Data.List (transpose)
+import Data.Time (Day)
 
-renderReport as t totals= renderHtml $ cmeReport as t totals
 
 bootStrapLink = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 
-
-cmeReport as t totals = docTypeHtml $ do
+renderReport :: [[String]] -> Day -> [(String, Double)] -> String
+renderReport as t totals = renderHtml $ docTypeHtml $ do
      H.head $ do
          H.title "CME Report"
          H.link ! rel "stylesheet" ! type_ "text/css" ! href bootStrapLink

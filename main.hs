@@ -166,7 +166,7 @@ reportActivity fp = do
   acts <- loadActivities fp
   let sActs = map toList acts
   let totals = map (\tp -> (show tp, totalHours tp acts)) [Cat1 ..]
-  writeFile ("cmereport" ) (renderReport sActs cd totals) -- ++ (show ct)) renderReport
+  writeFile ("cmereport.html" ) (renderReport sActs cd totals) 
     
 loadActivities fp = do
   ls <- fmap lines $ readFile fp --"cme.ht"
@@ -229,6 +229,7 @@ saveToFile acts (handle, fp) = do
   removeFile fp
   renameFile tempName fp
 
+totalHours :: CMEType -> [Activity] -> Double
 totalHours tp as = sum hrsForType
   where
     hrsForType = map hours $ filter (\a -> tp == (cmeType a)) as
