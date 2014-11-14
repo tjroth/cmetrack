@@ -20,7 +20,6 @@ data Command = List
              | Report
              deriving (Show, Ord, Eq)
 
-data ActivityFile = ActivityFile { activities :: [Activity] } deriving (Show, Read, Eq)
 
 data Activity = Activity { title :: String
                          , description :: String
@@ -34,16 +33,6 @@ data Activity = Activity { title :: String
 
 data CMEType = Cat1 | SACME | SAM deriving (Read, Show, Ord, Eq, Bounded, Enum)
 
-prettyActivity :: Activity -> String
-prettyActivity (Activity t d r c sc m tp h ct) = concat [ "Title: " ++ t ++ "\n"
-                                                        , "Description: " ++ d ++ "\n"
-                                                        , "Resource: " ++ r ++ "\n"
-                                                        , "Category: " ++ c ++ "\n"
-                                                        , "SubCategory: " ++ sc ++ "\n"
-                                                        , "Modality: " ++ m ++ "\n"
-                                                        , "Type: " ++ (show tp) ++ "\n"
-                                                        , "Hours: " ++ (show h) ++ "\n"
-                                                        , "Date: " ++ (show ct)]
 initActivity :: Day -> Activity
 initActivity d = Activity "" "" "" "" "" "" Cat1 2.0 d
 
@@ -243,3 +232,18 @@ saveToFile acts (handle, fp) = do
 totalHours tp as = sum hrsForType
   where
     hrsForType = map hours $ filter (\a -> tp == (cmeType a)) as
+
+
+prettyActivity :: Activity -> String
+prettyActivity (Activity t d r c sc m tp h ct) = concat [ "Title: " ++ t ++ "\n"
+                                                        , "Description: " ++ d ++ "\n"
+                                                        , "Resource: " ++ r ++ "\n"
+                                                        , "Category: " ++ c ++ "\n"
+                                                        , "SubCategory: " ++ sc ++ "\n"
+                                                        , "Modality: " ++ m ++ "\n"
+                                                        , "Type: " ++ (show tp) ++ "\n"
+                                                        , "Hours: " ++ (show h) ++ "\n"
+                                                        , "Date: " ++ (show ct)]
+
+
+--data ActivityFile = ActivityFile { activities :: [Activity] } deriving (Show, Read, Eq)
