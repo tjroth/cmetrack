@@ -5,14 +5,11 @@ import Text.PrettyPrint.Boxes
 
 ------------------------------------------------
 --Show a list of list of strings in table format
-tabulate :: Bool          -- Show Numbers
+tabulate :: Bool          -- Show Row Numbers
             -> [String]   -- Column Headers
             -> [[String]] -- Table Data
             -> Box
-tabulate fl hdr rows = if fl then
-                         nb <+> db 
-                       else
-                         db
+tabulate fl hdr rows = if fl then nb <+> db else db
   where
     cols = transpose ([hdr] ++ rows)
     numRows = length rows
