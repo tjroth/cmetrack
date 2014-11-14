@@ -19,11 +19,14 @@ cmeReport as t totals = docTypeHtml $ do
          H.title "CME Report"
          H.link ! rel "stylesheet" ! type_ "text/css" ! href bootStrapLink
      H.body $ do
-         H.h3 $ (toHtml $ "CME Report - generated on " ++ show t)
-         H.br
-         totalsTable $ map (\(h,t) -> [toHtml h, (toHtml t)]) totals 
-         H.br
-         reportTable as
+       H.div ! class_ "row" $ do
+         H.div ! class_ "col-md-3 col-md-offset-1" $ do
+           H.h3 $ (toHtml $ "CME Report - generated on " ++ show t)
+           H.br
+           totalsTable $ map (\(h,t) -> [toHtml h, (toHtml t)]) totals 
+           H.br
+         H.div ! class_ "col-md-10 col-md-offset-1" $ do
+           reportTable as
 
 totalsTable ts = do
   H.table ! class_ "table table-striped" $ do
